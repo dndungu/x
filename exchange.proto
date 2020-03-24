@@ -1,0 +1,125 @@
+syntax = "proto3";
+
+package x;
+
+service Exchange {
+  rpc GetAccount(AccountQuery) returns (Account);
+  rpc StreamAccount(StreamAccountQuery) returns (stream Account);
+
+  rpc PutOrder(Order) returns (OrderStatus);
+  rpc StreamOrders(stream Order) returns (OrderStatus);
+
+	rpc GetTrades(TradesQuery) returns (Trades);
+  rpc StreamTrades(StreamTradesQuery) returns (stream Trades);
+
+	rpc GetQuote(QuoteQuery) returns (Quote);
+  rpc StreamQuotes(StreamQuoteQuery) returns (stream Quote);
+}
+
+message Frequency {
+  int64 nanos = 1;
+}
+
+message Balance {
+  string id = 1;
+  string asset = 2;
+  double available = 3; 
+  double locked = 5;
+}
+
+message AccountQuery {}
+
+message StreamAccountQuery {
+  AccountQuery query = 1;
+  Frequency frequency = 2;
+}
+
+message Account {
+  map<string, Balance> balances = 1;
+  bool tradeable = 2;
+}
+
+message Order {
+  string id = 1;
+  double price = 2;
+  double quantity = 3;
+  enum OrderSide {
+    Buy = 0;
+    Sell = 1;
+  }
+  OrderSide side = 4;
+  string pair = 5;
+  enum TimeInForce {
+    GTC = 0;
+    GTT = 1;
+    IOC = 2;
+    FOK = 3;
+  }
+  TimeInForce timeInForce = 6;
+  enum OrderType {
+    LIMIT=0;
+    MARKET=1;
+    STOP_LOSS=2;
+    STOP_LOSS_LIMIT=3;
+    TAKE_PROFIT=4;
+    TAKE_PROFIT_LIMIT=5;
+    LIMIT_MAKER=6;
+  }
+	OrderType order_type=7;
+  uint32 cancelAfter = 8;
+}
+
+message OrderStatus {
+  string orderId = 1;
+  repeated Trade trades = 2;
+  string status = 3;
+}
+
+message TradesQuery {
+  string pair = 1;
+  int64 limit = 2;
+}
+
+message StreamTradesQuery {
+  TradesQuery query = 1;
+  Frequency frequency = 2;
+}
+
+message Trade {
+  string id = 1;
+  enum Maker {
+    Unknown = 0;
+    Buyer = 1;
+    Seller = 2;
+  }
+  Maker maker = 2;
+  double price = 3;
+  double quantity = 4;
+  Timestamp createdAt = 5;
+}
+
+message Trades {
+  repeated Trade trades=1;
+}
+
+message QuoteQuery {
+  string pair = 1;
+}
+
+message StreamQuoteQuery{
+  QuoteQuery query = 1;
+  Frequency frequency = 2;
+}
+
+message Quote {
+  double askPrice = 1;
+  double askVolume = 2;
+  double bidPrice = 3;
+  double bidVolume = 4;
+  Timestamp createdAt = 5;
+}
+
+message Timestamp {
+  int64 seconds = 1;
+  int64 nanos = 2;
+}
