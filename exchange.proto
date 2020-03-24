@@ -9,21 +9,19 @@ service Exchange {
   rpc PutOrder(Order) returns (OrderStatus);
   rpc StreamOrders(stream Order) returns (OrderStatus);
 
-	rpc GetTrades(TradesQuery) returns (Trades);
+  rpc GetTrades(TradesQuery) returns (Trades);
   rpc StreamTrades(StreamTradesQuery) returns (stream Trades);
 
-	rpc GetQuote(QuoteQuery) returns (Quote);
+  rpc GetQuote(QuoteQuery) returns (Quote);
   rpc StreamQuotes(StreamQuoteQuery) returns (stream Quote);
 }
 
-message Frequency {
-  int64 nanos = 1;
-}
+message Frequency { int64 nanos = 1; }
 
 message Balance {
   string id = 1;
   string asset = 2;
-  double available = 3; 
+  double available = 3;
   double locked = 5;
 }
 
@@ -57,15 +55,15 @@ message Order {
   }
   TimeInForce timeInForce = 6;
   enum OrderType {
-    LIMIT=0;
-    MARKET=1;
-    STOP_LOSS=2;
-    STOP_LOSS_LIMIT=3;
-    TAKE_PROFIT=4;
-    TAKE_PROFIT_LIMIT=5;
-    LIMIT_MAKER=6;
+    LIMIT = 0;
+    MARKET = 1;
+    STOP_LOSS = 2;
+    STOP_LOSS_LIMIT = 3;
+    TAKE_PROFIT = 4;
+    TAKE_PROFIT_LIMIT = 5;
+    LIMIT_MAKER = 6;
   }
-	OrderType order_type=7;
+  OrderType order_type = 7;
   uint32 cancelAfter = 8;
 }
 
@@ -98,15 +96,11 @@ message Trade {
   Timestamp createdAt = 5;
 }
 
-message Trades {
-  repeated Trade trades=1;
-}
+message Trades { repeated Trade trades = 1; }
 
-message QuoteQuery {
-  string pair = 1;
-}
+message QuoteQuery { string pair = 1; }
 
-message StreamQuoteQuery{
+message StreamQuoteQuery {
   QuoteQuery query = 1;
   Frequency frequency = 2;
 }
