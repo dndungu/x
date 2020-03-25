@@ -64,7 +64,7 @@ message Order {
     LIMIT_MAKER = 6;
   }
   OrderType order_type = 7;
-  uint32 cancelAfter = 8;
+  uint32 cancel_after = 8;
 }
 
 message OrderStatus {
@@ -95,7 +95,7 @@ message Trade {
   Maker maker = 2;
   double price = 3;
   double quantity = 4;
-  Timestamp createdAt = 5;
+  Timestamp created_at = 5;
 }
 
 message Trades { repeated Trade trades = 1; }
@@ -109,10 +109,10 @@ message StreamQuoteQuery {
 
 message Quote {
   double askPrice = 1;
-  double askVolume = 2;
-  double bidPrice = 3;
-  double bidVolume = 4;
-  Timestamp createdAt = 5;
+  double ask_quantity = 2;
+  double bid_price = 3;
+  double bid_quantity = 4;
+  Timestamp created_at = 5;
 }
 
 message Timestamp {
