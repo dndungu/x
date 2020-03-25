@@ -95,7 +95,8 @@ message Trade {
   Maker maker = 2;
   double price = 3;
   double quantity = 4;
-  Timestamp created_at = 5;
+  string pair = 5;
+  Timestamp created_at = 6;
 }
 
 message Trades { repeated Trade trades = 1; }
@@ -112,7 +113,8 @@ message Quote {
   double ask_quantity = 2;
   double bid_price = 3;
   double bid_quantity = 4;
-  Timestamp created_at = 5;
+  string pair = 5;
+  Timestamp created_at = 6;
 }
 
 message Timestamp {
