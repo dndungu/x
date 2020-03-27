@@ -10,10 +10,10 @@ service Exchange {
   rpc StreamOrders(stream Order) returns (OrderStatus);
 
   rpc GetTrades(TradesQuery) returns (Trades);
-  rpc StreamTrades(StreamTradeQuery) returns (stream Trade);
+  rpc StreamTrade(StreamTradeQuery) returns (stream Trade);
 
   rpc GetQuote(QuoteQuery) returns (Quote);
-  rpc StreamQuotes(StreamQuoteQuery) returns (stream Quote);
+  rpc StreamQuote(StreamQuoteQuery) returns (stream Quote);
 }
 
 message Frequency { int64 nanos = 1; }
