@@ -10,7 +10,7 @@ service Exchange {
   rpc StreamOrders(stream Order) returns (OrderStatus);
 
   rpc GetTrades(TradesQuery) returns (Trades);
-  rpc StreamTrades(StreamTradesQuery) returns (stream Trades);
+  rpc StreamTrades(StreamTradeQuery) returns (stream Trade);
 
   rpc GetQuote(QuoteQuery) returns (Quote);
   rpc StreamQuotes(StreamQuoteQuery) returns (stream Quote);
@@ -80,7 +80,7 @@ message TradesQuery {
   int64 limit = 2;
 }
 
-message StreamTradesQuery {
+message StreamTradeQuery {
   TradeQuery query = 1;
   Frequency frequency = 2;
 }
