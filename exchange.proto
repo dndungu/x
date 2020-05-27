@@ -109,7 +109,7 @@ message StreamQuoteQuery {
 }
 
 message Quote {
-  double askPrice = 1;
+  double ask_price = 1;
   double ask_quantity = 2;
   double bid_price = 3;
   double bid_quantity = 4;
